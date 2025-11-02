@@ -1,0 +1,882 @@
+import pandas as pd
+import numpy as np
+pd.read_csv('zoo.csv', delimiter=',')
+animal	uniq_id	water_need
+0	elephant	1001	500
+1	elephant	1002	600
+2	elephant	1003	550
+3	tiger	1004	300
+4	tiger	1005	320
+5	tiger	1006	330
+6	tiger	1007	290
+7	tiger	1008	310
+8	zebra	1009	200
+9	zebra	1010	220
+10	zebra	1011	240
+11	zebra	1012	230
+12	zebra	1013	220
+13	zebra	1014	100
+14	zebra	1015	80
+15	lion	1016	420
+16	lion	1017	600
+17	lion	1018	500
+18	lion	1019	390
+19	kangaroo	1020	410
+20	kangaroo	1021	430
+21	kangaroo	1022	410
+pd.read_csv('pandas_tutorial_read.csv')
+1/1/2018 0:01	read	country_7	2458151261	SEO	North America
+0	1/1/2018 0:03	read	country_7	2458151262	SEO	South America
+1	1/1/2018 0:04	read	country_7	2458151263	AdWords	Africa
+2	1/1/2018 0:04	read	country_7	2458151264	AdWords	Europe
+3	1/1/2018 0:05	read	country_8	2458151265	Reddit	North America
+4	1/1/2018 0:05	read	country_6	2458151266	Reddit	North America
+...	...	...	...	...	...	...
+1789	1/1/2018 23:57	read	country_2	2458153051	AdWords	North America
+1790	1/1/2018 23:58	read	country_8	2458153052	SEO	Asia
+1791	1/1/2018 23:59	read	country_6	2458153053	Reddit	Asia
+1792	1/1/2018 23:59	read	country_7	2458153054	AdWords	Europe
+1793	1/1/2018 23:59	read	country_5	2458153055	Reddit	Asia
+1794 rows × 6 columns
+
+pd.read_csv('pandas_tutorial_read.csv', 
+	    names=['my_datetime', 'event', 'country', 'user_id', 'source', 'topic'])
+my_datetime	event	country	user_id	source	topic
+0	1/1/2018 0:01	read	country_7	2458151261	SEO	North America
+1	1/1/2018 0:03	read	country_7	2458151262	SEO	South America
+2	1/1/2018 0:04	read	country_7	2458151263	AdWords	Africa
+3	1/1/2018 0:04	read	country_7	2458151264	AdWords	Europe
+4	1/1/2018 0:05	read	country_8	2458151265	Reddit	North America
+...	...	...	...	...	...	...
+1790	1/1/2018 23:57	read	country_2	2458153051	AdWords	North America
+1791	1/1/2018 23:58	read	country_8	2458153052	SEO	Asia
+1792	1/1/2018 23:59	read	country_6	2458153053	Reddit	Asia
+1793	1/1/2018 23:59	read	country_7	2458153054	AdWords	Europe
+1794	1/1/2018 23:59	read	country_5	2458153055	Reddit	Asia
+1795 rows × 6 columns
+
+pd.read_csv(
+    'https://pythonru.com/downloads/pandas_tutorial_read.csv',
+    delimiter=';', 
+    names=['my_datetime', 'event', 'country', 
+           'user_id', 'source', 'topic']
+)  
+my_datetime	event	country	user_id	source	topic
+0	2018-01-01 00:01:01	read	country_7	2458151261	SEO	North America
+1	2018-01-01 00:03:20	read	country_7	2458151262	SEO	South America
+2	2018-01-01 00:04:01	read	country_7	2458151263	AdWords	Africa
+3	2018-01-01 00:04:02	read	country_7	2458151264	AdWords	Europe
+4	2018-01-01 00:05:03	read	country_8	2458151265	Reddit	North America
+...	...	...	...	...	...	...
+1790	2018-01-01 23:57:14	read	country_2	2458153051	AdWords	North America
+1791	2018-01-01 23:58:33	read	country_8	2458153052	SEO	Asia
+1792	2018-01-01 23:59:36	read	country_6	2458153053	Reddit	Asia
+1793	2018-01-01 23:59:36	read	country_7	2458153054	AdWords	Europe
+1794	2018-01-01 23:59:38	read	country_5	2458153055	Reddit	Asia
+1795 rows × 6 columns
+
+article_read = pd.read_csv(
+    'pandas_tutorial_read.csv', 
+    names = ['my_datetime', 'event', 'country', 
+	    'user_id', 'source', 'topic']
+)
+article_read
+my_datetime	event	country	user_id	source	topic
+0	1/1/2018 0:01	read	country_7	2458151261	SEO	North America
+1	1/1/2018 0:03	read	country_7	2458151262	SEO	South America
+2	1/1/2018 0:04	read	country_7	2458151263	AdWords	Africa
+3	1/1/2018 0:04	read	country_7	2458151264	AdWords	Europe
+4	1/1/2018 0:05	read	country_8	2458151265	Reddit	North America
+...	...	...	...	...	...	...
+1790	1/1/2018 23:57	read	country_2	2458153051	AdWords	North America
+1791	1/1/2018 23:58	read	country_8	2458153052	SEO	Asia
+1792	1/1/2018 23:59	read	country_6	2458153053	Reddit	Asia
+1793	1/1/2018 23:59	read	country_7	2458153054	AdWords	Europe
+1794	1/1/2018 23:59	read	country_5	2458153055	Reddit	Asia
+1795 rows × 6 columns
+
+article_read.head()
+my_datetime	event	country	user_id	source	topic
+0	1/1/2018 0:01	read	country_7	2458151261	SEO	North America
+1	1/1/2018 0:03	read	country_7	2458151262	SEO	South America
+2	1/1/2018 0:04	read	country_7	2458151263	AdWords	Africa
+3	1/1/2018 0:04	read	country_7	2458151264	AdWords	Europe
+4	1/1/2018 0:05	read	country_8	2458151265	Reddit	North America
+article_read.tail()
+my_datetime	event	country	user_id	source	topic
+1790	1/1/2018 23:57	read	country_2	2458153051	AdWords	North America
+1791	1/1/2018 23:58	read	country_8	2458153052	SEO	Asia
+1792	1/1/2018 23:59	read	country_6	2458153053	Reddit	Asia
+1793	1/1/2018 23:59	read	country_7	2458153054	AdWords	Europe
+1794	1/1/2018 23:59	read	country_5	2458153055	Reddit	Asia
+article_read.sample(5)
+my_datetime	event	country	user_id	source	topic
+385	1/1/2018 5:15	read	country_4	2458151646	Reddit	Europe
+115	1/1/2018 1:42	read	country_2	2458151376	AdWords	North America
+1347	1/1/2018 18:17	read	country_2	2458152608	Reddit	Asia
+801	1/1/2018 10:56	read	country_2	2458152062	Reddit	Asia
+1209	1/1/2018 16:25	read	country_1	2458152470	Reddit	Asia
+article_read[['country', 'user_id']]
+country	user_id
+0	country_7	2458151261
+1	country_7	2458151262
+2	country_7	2458151263
+3	country_7	2458151264
+4	country_8	2458151265
+...	...	...
+1790	country_2	2458153051
+1791	country_8	2458153052
+1792	country_6	2458153053
+1793	country_7	2458153054
+1794	country_5	2458153055
+1795 rows × 2 columns
+
+article_read.user_id
+0       2458151261
+1       2458151262
+2       2458151263
+3       2458151264
+4       2458151265
+           ...    
+1790    2458153051
+1791    2458153052
+1792    2458153053
+1793    2458153054
+1794    2458153055
+Name: user_id, Length: 1795, dtype: int64
+article_read['user_id']
+0       2458151261
+1       2458151262
+2       2458151263
+3       2458151264
+4       2458151265
+           ...    
+1790    2458153051
+1791    2458153052
+1792    2458153053
+1793    2458153054
+1794    2458153055
+Name: user_id, Length: 1795, dtype: int64
+article_read[article_read.source == 'SEO']
+my_datetime	event	country	user_id	source	topic
+0	1/1/2018 0:01	read	country_7	2458151261	SEO	North America
+1	1/1/2018 0:03	read	country_7	2458151262	SEO	South America
+11	1/1/2018 0:08	read	country_7	2458151272	SEO	Australia
+15	1/1/2018 0:11	read	country_7	2458151276	SEO	North America
+16	1/1/2018 0:13	read	country_8	2458151277	SEO	North America
+...	...	...	...	...	...	...
+1772	1/1/2018 23:45	read	country_7	2458153033	SEO	South America
+1777	1/1/2018 23:49	read	country_5	2458153038	SEO	North America
+1779	1/1/2018 23:51	read	country_4	2458153040	SEO	South America
+1784	1/1/2018 23:54	read	country_2	2458153045	SEO	North America
+1791	1/1/2018 23:58	read	country_8	2458153052	SEO	Asia
+346 rows × 6 columns
+
+article_read.source == 'SEO'
+0        True
+1        True
+2       False
+3       False
+4       False
+        ...  
+1790    False
+1791     True
+1792    False
+1793    False
+1794    False
+Name: source, Length: 1795, dtype: bool
+article_read[article_read.source == 'SEO']
+my_datetime	event	country	user_id	source	topic
+0	1/1/2018 0:01	read	country_7	2458151261	SEO	North America
+1	1/1/2018 0:03	read	country_7	2458151262	SEO	South America
+11	1/1/2018 0:08	read	country_7	2458151272	SEO	Australia
+15	1/1/2018 0:11	read	country_7	2458151276	SEO	North America
+16	1/1/2018 0:13	read	country_8	2458151277	SEO	North America
+...	...	...	...	...	...	...
+1772	1/1/2018 23:45	read	country_7	2458153033	SEO	South America
+1777	1/1/2018 23:49	read	country_5	2458153038	SEO	North America
+1779	1/1/2018 23:51	read	country_4	2458153040	SEO	South America
+1784	1/1/2018 23:54	read	country_2	2458153045	SEO	North America
+1791	1/1/2018 23:58	read	country_8	2458153052	SEO	Asia
+346 rows × 6 columns
+
+article_read.head()[['country', 'user_id']]
+country	user_id
+0	country_7	2458151261
+1	country_7	2458151262
+2	country_7	2458151263
+3	country_7	2458151264
+4	country_8	2458151265
+article_read[['country', 'user_id']].head()
+country	user_id
+0	country_7	2458151261
+1	country_7	2458151262
+2	country_7	2458151263
+3	country_7	2458151264
+4	country_8	2458151265
+article_read[article_read.country == 'country_2'][['user_id', 'topic', 'country']].head()
+user_id	topic	country
+6	2458151267	Europe	country_2
+13	2458151274	Europe	country_2
+17	2458151278	Asia	country_2
+19	2458151280	Asia	country_2
+20	2458151281	Asia	country_2
+article_read[article_read.country == 'country_2'][['user_id', 'topic', 'country']].head()
+user_id	topic	country
+6	2458151267	Europe	country_2
+13	2458151274	Europe	country_2
+17	2458151278	Asia	country_2
+19	2458151280	Asia	country_2
+20	2458151281	Asia	country_2
+zoo = pd.read_csv('zoo.csv', delimiter = ',')
+zoo.count()
+animal        22
+uniq_id       22
+water_need    22
+dtype: int64
+zoo[['animal']].count()
+animal    22
+dtype: int64
+zoo.animal.count()
+22
+zoo.water_need.sum()
+7650
+zoo.sum()
+animal        elephantelephantelephanttigertigertigertigerti...
+uniq_id                                                   22253
+water_need                                                 7650
+dtype: object
+zoo.water_need.min()
+80
+zoo.water_need.max()
+600
+zoo.water_need.mean()
+347.72727272727275
+zoo.water_need.median()
+325.0
+zoo.groupby('animal').mean()
+uniq_id	water_need
+animal		
+elephant	1002.0	550.000000
+kangaroo	1021.0	416.666667
+lion	1017.5	477.500000
+tiger	1006.0	310.000000
+zebra	1012.0	184.285714
+zoo.groupby('animal').mean()[['water_need']]
+water_need
+animal	
+elephant	550.000000
+kangaroo	416.666667
+lion	477.500000
+tiger	310.000000
+zebra	184.285714
+zoo.groupby('animal').mean().water_need
+animal
+elephant    550.000000
+kangaroo    416.666667
+lion        477.500000
+tiger       310.000000
+zebra       184.285714
+Name: water_need, dtype: float64
+article_read.groupby('source').count()
+my_datetime	event	country	user_id	topic
+source					
+AdWords	500	500	500	500	500
+Reddit	949	949	949	949	949
+SEO	346	346	346	346	346
+article_read.groupby('source').count()[['user_id']]
+user_id
+source	
+AdWords	500
+Reddit	949
+SEO	346
+article_read[article_read.country == 'country_2'].groupby(['source', 'topic']).count()
+my_datetime	event	country	user_id
+source	topic				
+AdWords	Africa	3	3	3	3
+Asia	31	31	31	31
+Australia	6	6	6	6
+Europe	46	46	46	46
+North America	11	11	11	11
+South America	14	14	14	14
+Reddit	Africa	24	24	24	24
+Asia	139	139	139	139
+Australia	18	18	18	18
+Europe	29	29	29	29
+North America	27	27	27	27
+South America	26	26	26	26
+SEO	Africa	7	7	7	7
+Asia	9	9	9	9
+Australia	10	10	10	10
+Europe	4	4	4	4
+North America	42	42	42	42
+South America	16	16	16	16
+zoo_eats = pd.DataFrame([['elephant','vegetables'], ['tiger','meat'], ['kangaroo','vegetables'], ['zebra','vegetables'], ['giraffe','vegetables']], columns=['animal', 'food'])
+zoo_eats
+animal	food
+0	elephant	vegetables
+1	tiger	meat
+2	kangaroo	vegetables
+3	zebra	vegetables
+4	giraffe	vegetables
+zoo_eats.merge(zoo)
+animal	food	uniq_id	water_need
+0	elephant	vegetables	1001	500
+1	elephant	vegetables	1002	600
+2	elephant	vegetables	1003	550
+3	tiger	meat	1004	300
+4	tiger	meat	1005	320
+5	tiger	meat	1006	330
+6	tiger	meat	1007	290
+7	tiger	meat	1008	310
+8	kangaroo	vegetables	1020	410
+9	kangaroo	vegetables	1021	430
+10	kangaroo	vegetables	1022	410
+11	zebra	vegetables	1009	200
+12	zebra	vegetables	1010	220
+13	zebra	vegetables	1011	240
+14	zebra	vegetables	1012	230
+15	zebra	vegetables	1013	220
+16	zebra	vegetables	1014	100
+17	zebra	vegetables	1015	80
+zoo.merge(zoo_eats)
+animal	uniq_id	water_need	food
+0	elephant	1001	500	vegetables
+1	elephant	1002	600	vegetables
+2	elephant	1003	550	vegetables
+3	tiger	1004	300	meat
+4	tiger	1005	320	meat
+5	tiger	1006	330	meat
+6	tiger	1007	290	meat
+7	tiger	1008	310	meat
+8	zebra	1009	200	vegetables
+9	zebra	1010	220	vegetables
+10	zebra	1011	240	vegetables
+11	zebra	1012	230	vegetables
+12	zebra	1013	220	vegetables
+13	zebra	1014	100	vegetables
+14	zebra	1015	80	vegetables
+15	kangaroo	1020	410	vegetables
+16	kangaroo	1021	430	vegetables
+17	kangaroo	1022	410	vegetables
+zoo.merge(zoo_eats)
+animal	uniq_id	water_need	food
+0	elephant	1001	500	vegetables
+1	elephant	1002	600	vegetables
+2	elephant	1003	550	vegetables
+3	tiger	1004	300	meat
+4	tiger	1005	320	meat
+5	tiger	1006	330	meat
+6	tiger	1007	290	meat
+7	tiger	1008	310	meat
+8	zebra	1009	200	vegetables
+9	zebra	1010	220	vegetables
+10	zebra	1011	240	vegetables
+11	zebra	1012	230	vegetables
+12	zebra	1013	220	vegetables
+13	zebra	1014	100	vegetables
+14	zebra	1015	80	vegetables
+15	kangaroo	1020	410	vegetables
+16	kangaroo	1021	430	vegetables
+17	kangaroo	1022	410	vegetables
+zoo.merge(zoo_eats, how='outer')
+animal	uniq_id	water_need	food
+0	elephant	1001.0	500.0	vegetables
+1	elephant	1002.0	600.0	vegetables
+2	elephant	1003.0	550.0	vegetables
+3	tiger	1004.0	300.0	meat
+4	tiger	1005.0	320.0	meat
+5	tiger	1006.0	330.0	meat
+6	tiger	1007.0	290.0	meat
+7	tiger	1008.0	310.0	meat
+8	zebra	1009.0	200.0	vegetables
+9	zebra	1010.0	220.0	vegetables
+10	zebra	1011.0	240.0	vegetables
+11	zebra	1012.0	230.0	vegetables
+12	zebra	1013.0	220.0	vegetables
+13	zebra	1014.0	100.0	vegetables
+14	zebra	1015.0	80.0	vegetables
+15	lion	1016.0	420.0	NaN
+16	lion	1017.0	600.0	NaN
+17	lion	1018.0	500.0	NaN
+18	lion	1019.0	390.0	NaN
+19	kangaroo	1020.0	410.0	vegetables
+20	kangaroo	1021.0	430.0	vegetables
+21	kangaroo	1022.0	410.0	vegetables
+22	giraffe	NaN	NaN	vegetables
+zoo.merge(zoo_eats, how='left')
+animal	uniq_id	water_need	food
+0	elephant	1001	500	vegetables
+1	elephant	1002	600	vegetables
+2	elephant	1003	550	vegetables
+3	tiger	1004	300	meat
+4	tiger	1005	320	meat
+5	tiger	1006	330	meat
+6	tiger	1007	290	meat
+7	tiger	1008	310	meat
+8	zebra	1009	200	vegetables
+9	zebra	1010	220	vegetables
+10	zebra	1011	240	vegetables
+11	zebra	1012	230	vegetables
+12	zebra	1013	220	vegetables
+13	zebra	1014	100	vegetables
+14	zebra	1015	80	vegetables
+15	lion	1016	420	NaN
+16	lion	1017	600	NaN
+17	lion	1018	500	NaN
+18	lion	1019	390	NaN
+19	kangaroo	1020	410	vegetables
+20	kangaroo	1021	430	vegetables
+21	kangaroo	1022	410	vegetables
+zoo.merge(zoo_eats, how = 'left', left_on='animal', right_on='animal')
+animal	uniq_id	water_need	food
+0	elephant	1001	500	vegetables
+1	elephant	1002	600	vegetables
+2	elephant	1003	550	vegetables
+3	tiger	1004	300	meat
+4	tiger	1005	320	meat
+5	tiger	1006	330	meat
+6	tiger	1007	290	meat
+7	tiger	1008	310	meat
+8	zebra	1009	200	vegetables
+9	zebra	1010	220	vegetables
+10	zebra	1011	240	vegetables
+11	zebra	1012	230	vegetables
+12	zebra	1013	220	vegetables
+13	zebra	1014	100	vegetables
+14	zebra	1015	80	vegetables
+15	lion	1016	420	NaN
+16	lion	1017	600	NaN
+17	lion	1018	500	NaN
+18	lion	1019	390	NaN
+19	kangaroo	1020	410	vegetables
+20	kangaroo	1021	430	vegetables
+21	kangaroo	1022	410	vegetables
+zoo.sort_values('water_need')
+animal	uniq_id	water_need
+14	zebra	1015	80
+13	zebra	1014	100
+8	zebra	1009	200
+9	zebra	1010	220
+12	zebra	1013	220
+11	zebra	1012	230
+10	zebra	1011	240
+6	tiger	1007	290
+3	tiger	1004	300
+7	tiger	1008	310
+4	tiger	1005	320
+5	tiger	1006	330
+18	lion	1019	390
+19	kangaroo	1020	410
+21	kangaroo	1022	410
+15	lion	1016	420
+20	kangaroo	1021	430
+17	lion	1018	500
+0	elephant	1001	500
+2	elephant	1003	550
+16	lion	1017	600
+1	elephant	1002	600
+zoo.sort_values(by=['animal', 'water_need'])
+animal	uniq_id	water_need
+0	elephant	1001	500
+2	elephant	1003	550
+1	elephant	1002	600
+19	kangaroo	1020	410
+21	kangaroo	1022	410
+20	kangaroo	1021	430
+18	lion	1019	390
+15	lion	1016	420
+17	lion	1018	500
+16	lion	1017	600
+6	tiger	1007	290
+3	tiger	1004	300
+7	tiger	1008	310
+4	tiger	1005	320
+5	tiger	1006	330
+14	zebra	1015	80
+13	zebra	1014	100
+8	zebra	1009	200
+9	zebra	1010	220
+12	zebra	1013	220
+11	zebra	1012	230
+10	zebra	1011	240
+zoo.sort_values('water_need')
+animal	uniq_id	water_need
+14	zebra	1015	80
+13	zebra	1014	100
+8	zebra	1009	200
+9	zebra	1010	220
+12	zebra	1013	220
+11	zebra	1012	230
+10	zebra	1011	240
+6	tiger	1007	290
+3	tiger	1004	300
+7	tiger	1008	310
+4	tiger	1005	320
+5	tiger	1006	330
+18	lion	1019	390
+19	kangaroo	1020	410
+21	kangaroo	1022	410
+15	lion	1016	420
+20	kangaroo	1021	430
+17	lion	1018	500
+0	elephant	1001	500
+2	elephant	1003	550
+16	lion	1017	600
+1	elephant	1002	600
+zoo.sort_values(by=['animal', 'water_need'])
+animal	uniq_id	water_need
+0	elephant	1001	500
+2	elephant	1003	550
+1	elephant	1002	600
+19	kangaroo	1020	410
+21	kangaroo	1022	410
+20	kangaroo	1021	430
+18	lion	1019	390
+15	lion	1016	420
+17	lion	1018	500
+16	lion	1017	600
+6	tiger	1007	290
+3	tiger	1004	300
+7	tiger	1008	310
+4	tiger	1005	320
+5	tiger	1006	330
+14	zebra	1015	80
+13	zebra	1014	100
+8	zebra	1009	200
+9	zebra	1010	220
+12	zebra	1013	220
+11	zebra	1012	230
+10	zebra	1011	240
+zoo.sort_values(by=['water_need'])
+animal	uniq_id	water_need
+14	zebra	1015	80
+13	zebra	1014	100
+8	zebra	1009	200
+9	zebra	1010	220
+12	zebra	1013	220
+11	zebra	1012	230
+10	zebra	1011	240
+6	tiger	1007	290
+3	tiger	1004	300
+7	tiger	1008	310
+4	tiger	1005	320
+5	tiger	1006	330
+18	lion	1019	390
+19	kangaroo	1020	410
+21	kangaroo	1022	410
+15	lion	1016	420
+20	kangaroo	1021	430
+17	lion	1018	500
+0	elephant	1001	500
+2	elephant	1003	550
+16	lion	1017	600
+1	elephant	1002	600
+zoo.sort_values(by=['water_need'], ascending=False)
+animal	uniq_id	water_need
+1	elephant	1002	600
+16	lion	1017	600
+2	elephant	1003	550
+0	elephant	1001	500
+17	lion	1018	500
+20	kangaroo	1021	430
+15	lion	1016	420
+19	kangaroo	1020	410
+21	kangaroo	1022	410
+18	lion	1019	390
+5	tiger	1006	330
+4	tiger	1005	320
+7	tiger	1008	310
+3	tiger	1004	300
+6	tiger	1007	290
+10	zebra	1011	240
+11	zebra	1012	230
+9	zebra	1010	220
+12	zebra	1013	220
+8	zebra	1009	200
+13	zebra	1014	100
+14	zebra	1015	80
+zoo.sort_values(by=['water_need'], ascending=False).reset_index()
+index	animal	uniq_id	water_need
+0	1	elephant	1002	600
+1	16	lion	1017	600
+2	2	elephant	1003	550
+3	0	elephant	1001	500
+4	17	lion	1018	500
+5	20	kangaroo	1021	430
+6	15	lion	1016	420
+7	19	kangaroo	1020	410
+8	21	kangaroo	1022	410
+9	18	lion	1019	390
+10	5	tiger	1006	330
+11	4	tiger	1005	320
+12	7	tiger	1008	310
+13	3	tiger	1004	300
+14	6	tiger	1007	290
+15	10	zebra	1011	240
+16	11	zebra	1012	230
+17	9	zebra	1010	220
+18	12	zebra	1013	220
+19	8	zebra	1009	200
+20	13	zebra	1014	100
+21	14	zebra	1015	80
+zoo.sort_values(by=['water_need'], ascending=False).reset_index(drop=True)
+animal	uniq_id	water_need
+0	elephant	1002	600
+1	lion	1017	600
+2	elephant	1003	550
+3	elephant	1001	500
+4	lion	1018	500
+5	kangaroo	1021	430
+6	lion	1016	420
+7	kangaroo	1020	410
+8	kangaroo	1022	410
+9	lion	1019	390
+10	tiger	1006	330
+11	tiger	1005	320
+12	tiger	1008	310
+13	tiger	1004	300
+14	tiger	1007	290
+15	zebra	1011	240
+16	zebra	1012	230
+17	zebra	1010	220
+18	zebra	1013	220
+19	zebra	1009	200
+20	zebra	1014	100
+21	zebra	1015	80
+zoo.merge(zoo_eats, how='left')
+animal	uniq_id	water_need	food
+0	elephant	1001	500	vegetables
+1	elephant	1002	600	vegetables
+2	elephant	1003	550	vegetables
+3	tiger	1004	300	meat
+4	tiger	1005	320	meat
+5	tiger	1006	330	meat
+6	tiger	1007	290	meat
+7	tiger	1008	310	meat
+8	zebra	1009	200	vegetables
+9	zebra	1010	220	vegetables
+10	zebra	1011	240	vegetables
+11	zebra	1012	230	vegetables
+12	zebra	1013	220	vegetables
+13	zebra	1014	100	vegetables
+14	zebra	1015	80	vegetables
+15	lion	1016	420	NaN
+16	lion	1017	600	NaN
+17	lion	1018	500	NaN
+18	lion	1019	390	NaN
+19	kangaroo	1020	410	vegetables
+20	kangaroo	1021	430	vegetables
+21	kangaroo	1022	410	vegetables
+zoo.merge(zoo_eats, how='left').fillna('meat')
+animal	uniq_id	water_need	food
+0	elephant	1001	500	vegetables
+1	elephant	1002	600	vegetables
+2	elephant	1003	550	vegetables
+3	tiger	1004	300	meat
+4	tiger	1005	320	meat
+5	tiger	1006	330	meat
+6	tiger	1007	290	meat
+7	tiger	1008	310	meat
+8	zebra	1009	200	vegetables
+9	zebra	1010	220	vegetables
+10	zebra	1011	240	vegetables
+11	zebra	1012	230	vegetables
+12	zebra	1013	220	vegetables
+13	zebra	1014	100	vegetables
+14	zebra	1015	80	vegetables
+15	lion	1016	420	meat
+16	lion	1017	600	meat
+17	lion	1018	500	meat
+18	lion	1019	390	meat
+19	kangaroo	1020	410	vegetables
+20	kangaroo	1021	430	vegetables
+21	kangaroo	1022	410	vegetables
+https://pythonru.com/downloads/pandas_tutorial_buy.csv
+blog_buy = pd.read_csv('pandas_tutorial_buy.csv', delimiter=';', names=['my_date_time', 'event', 'user_id', 'amount'])
+  File "C:\Users\USER\AppData\Local\Temp\ipykernel_5800\4182303530.py", line 1
+    https://pythonru.com/downloads/pandas_tutorial_buy.csv
+          ^
+SyntaxError: invalid syntax
+blog_buy = pd.read_csv('pandas_tutorial_buy.csv', delimiter=';', names=['my_date_time', 'event', 'user_id', 'amount'])
+step_1 = article_read.merge(blog_buy, how = 'left', left_on = 'user_id', right_on = 'user_id')
+step_2 = step_1.fillna(0)
+step_3 = step_2.groupby('country').sum()
+step_4 = step_3.amount
+step_5 = step_4.sort_values(ascending = False)
+step_5.head(3)
+country
+country_4    1112.0
+country_5     324.0
+country_2     296.0
+Name: amount, dtype: float64
+blog_buy = pd.read_csv('pandas_tutorial_buy.csv', delimiter=';', names=['my_date_time', 'event', 'user_id', 'amount'])
+blog_buy
+my_date_time	event	user_id	amount
+0	2018-01-01 04:04:59	buy	2458151555	8
+1	2018-01-01 09:28:00	buy	2458151933	8
+2	2018-01-01 13:23:16	buy	2458152245	8
+3	2018-01-01 14:20:43	buy	2458152315	100
+4	2018-01-02 02:57:43	buy	2458153264	8
+...	...	...	...	...
+65	2018-01-07 18:44:58	buy	2458157339	8
+66	2018-01-07 19:09:53	buy	2458157601	8
+67	2018-01-07 20:24:35	buy	2458157193	8
+68	2018-01-07 22:11:28	buy	2458157128	8
+69	2018-01-07 23:58:19	buy	2458159286	8
+70 rows × 4 columns
+
+step_1 = article_read.merge(blog_buy, how='left', left_on='user_id', right_on='user_id')
+step_2=step_1.amount
+step_3=step_2.fillna(0)
+result=step_3.mean()
+result
+1.0852367688022284
+step_1 = article_read.merge(blog_buy, how = 'left', left_on = 'user_id', right_on = 'user_id')
+step_2 = step_1.fillna(0)
+step_3 = step_2.groupby('country').sum()
+step_4 = step_3.amount
+step_5 = step_4.sort_values(ascending = False)
+step_5.head(3)
+country
+country_4    1112.0
+country_5     324.0
+country_2     296.0
+Name: amount, dtype: float64
+ NumPy в Python. Часть 1
+  File "C:\Users\USER\AppData\Local\Temp\ipykernel_10156\1873465948.py", line 1
+    NumPy в Python. Часть 1
+          ^
+SyntaxError: invalid syntax
+import numpy as np
+a = np.array([1, 4, 5, 8], float)
+a
+array([1., 4., 5., 8.])
+type(a)
+numpy.ndarray
+a[:2]
+array([1., 4.])
+a[3]
+8.0
+a[0] = 5.
+a
+array([5., 4., 5., 8.])
+a = np.array([[1, 2, 3], [4, 5, 6]], float)
+a
+array([[1., 2., 3.],
+       [4., 5., 6.]])
+a[0,0]
+1.0
+a[0,1]
+2.0
+a = np.array([[1, 2, 3], [4, 5, 6]], float)
+a[1,:]
+array([4., 5., 6.])
+a[:,2]
+array([3., 6.])
+a[-1:, -2:]
+array([[5., 6.]])
+a.shape
+(2, 3)
+a.dtype
+dtype('float64')
+a = np.array([[1, 2, 3], [4, 5, 6]], float)
+len(a)
+2
+a = np.array([[1, 2, 3], [4, 5, 6]], float)
+2 in a
+True
+0 in a
+False
+a = np.array(range(10), float)
+a
+array([0., 1., 2., 3., 4., 5., 6., 7., 8., 9.])
+a = a.reshape((5, 2))
+a
+array([[0., 1.],
+       [2., 3.],
+       [4., 5.],
+       [6., 7.],
+       [8., 9.]])
+a.shape
+(5, 2)
+a = np.array([1, 2, 3], float)
+b = a
+c =  a.copy()
+a[0] = 0
+a
+array([0., 2., 3.])
+b
+array([0., 2., 3.])
+c
+array([1., 2., 3.])
+a = np.array([1, 2, 3], float)
+a.tolist()
+[1.0, 2.0, 3.0]
+list(a)
+[1.0, 2.0, 3.0]
+a = np.array([1, 2, 3], float)
+s = a.tostring()
+C:\Users\USER\AppData\Local\Temp\ipykernel_4048\2918348497.py:1: DeprecationWarning: tostring() is deprecated. Use tobytes() instead.
+  s = a.tostring()
+s
+b'\x00\x00\x00\x00\x00\x00\xf0?\x00\x00\x00\x00\x00\x00\x00@\x00\x00\x00\x00\x00\x00\x08@'
+np.fromstring(s)
+C:\Users\USER\AppData\Local\Temp\ipykernel_4048\4042211205.py:1: DeprecationWarning: The binary mode of fromstring is deprecated, as it behaves surprisingly on unicode inputs. Use frombuffer instead
+  np.fromstring(s)
+array([1., 2., 3.])
+a = np.array([1, 2, 3], float)
+a
+array([1., 2., 3.])
+a.fill(0)
+a
+array([0., 0., 0.])
+a = np.array(range(6), float).reshape((2, 3))
+a
+array([[0., 1., 2.],
+       [3., 4., 5.]])
+a.transpose()
+array([[0., 3.],
+       [1., 4.],
+       [2., 5.]])
+a = np.array([[1, 2, 3], [4, 5, 6]], float)
+a
+array([[1., 2., 3.],
+       [4., 5., 6.]])
+a.flatten()
+array([1., 2., 3., 4., 5., 6.])
+a = np.array([1,2], float)
+b = np.array([3,4,5,6], float)
+c = np.array([7,8,9], float)
+np.concatenate((a, b, c))
+array([1., 2., 3., 4., 5., 6., 7., 8., 9.])
+a = np.array([[1, 2], [3, 4]], float)
+b = np.array([[5, 6], [7,8]], float)
+np.concatenate((a,b))
+array([[1., 2.],
+       [3., 4.],
+       [5., 6.],
+       [7., 8.]])
+np.concatenate((a,b), axis=0)
+array([[1., 2.],
+       [3., 4.],
+       [5., 6.],
+       [7., 8.]])
+np.concatenate((a,b), axis=1)
+array([[1., 2., 5., 6.],
+       [3., 4., 7., 8.]])
+a = np.array([1, 2, 3], float)
+a
+array([1., 2., 3.])
+a[:,np.newaxis]
+array([[1.],
+       [2.],
+       [3.]])
+a[:,np.newaxis].shape
+(3, 1)
+b[np.newaxis,:]
+array([[[5., 6.],
+        [7., 8.]]])
+b[np.newaxis,:].shape
+(1, 2, 2)
+ 
